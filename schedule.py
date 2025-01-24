@@ -13,6 +13,7 @@ def read_excel_file(file: FileStorage):
     TEAMS = list(data['Teams'])
     NUM_FIELDS = int(data['Count'][0])
     NUM_ROOMS = int(data['Count'][1])
+    BREAK_TIME = int(data['Count'][2])
     
     defense = create_defense_schedule(TEAMS, NUM_ROOMS)
     
@@ -36,7 +37,7 @@ def read_excel_file(file: FileStorage):
             REAL_TIME = 600
         
     
-    game = create_game_schedule(TEAMS, NUM_FIELDS, defense)
+    game = create_game_schedule(TEAMS, NUM_FIELDS, defense, BREAK_TIME)
     
     # pprint(NUM_FIELDS)
     
@@ -72,10 +73,11 @@ def create_defense_schedule(team: list[str], num_rooms: int) -> dict:
     
     return RESULT
 
-def create_game_schedule(team: list[str], num_fields: int, defense_schedule: dict) -> dict:
+def create_game_schedule(team: list[str], num_fields: int, defense_schedule: dict, break_time: int) -> dict:
     
     teams = team.copy()
     
+    b_time = break_time - break_time % 10
     MAX_TIME_DEFENSE = max(defense_schedule.keys())
     
     if (len(teams) % num_fields != 0):
@@ -133,8 +135,11 @@ def create_game_schedule(team: list[str], num_fields: int, defense_schedule: dic
                 REAL_TIME = 600
             
             TIME += 10
+        if not (780 <= REAL_TIME <= 840) and REAL_TIME <= 1080 and match != matches[3]:
+            one[f"Перерыв на {b_time} мин"] = []
+            REAL_TIME += b_time
         RESULT[match] = one
     return RESULT
 
-if __name__ == "__main__":
-    pprint(read_excel_file(file))
+# if __name__ == "__main__":
+#     pprint(read_excel_file(file))
