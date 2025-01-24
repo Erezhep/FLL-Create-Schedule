@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Create Schedule {% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Create Schedule for FLL Challenge</h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="mb-4 is-invalid">
+            <label for="excel_file" class="form-label">Choose file (.xlsx)</label>
+            <input
+              type="file"
+              class="form-control {% if upload_file == 'upload' %} is-invalid {% endif %}"
+              name="excel_file"   
+              id="excel_file"
+              placeholder="Choose file"
+              accept=".xlsx"
+              aria-describedby="fileHelpId"
+            />
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary w-100">Upload Schedule</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

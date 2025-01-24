@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} Result {% endblock %}
+
+{% block content %}
+    <style>
+        .table td {
+            white-space: nowrap;
+        }        
+    </style>
+        <center><h3 class="badge text-bg-primary" style="font-size: 18px">Зашита проекта</h3></center>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Время</th>
+                    {% for i in data["NUM_ROOMS"] %}
+                        <th>Комната {{ i }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for time in data["DEFENSE"].keys() %}
+                    <tr>
+                        {% if data["DEFENSE"][time] != [] %}
+                            <td> {{ time }} </td>
+                            {% for team in data["DEFENSE"][time] %}
+                                <td> {{ team }} </td>
+                            {% endfor %}
+                        {% else %}
+                            <td colspan="{{ data['NUM_ROOMS']|length + 1 }}" class="text-center fw-bold bg-success" style="font-size: 18px;">
+                                {{ time }}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% for game in games %}
+                <center><h3 class="badge text-bg-primary" style="font-size: 18px">{{ game }}</h3></center>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            {% for i in data["NUM_FIELDS"] %}
+                                <th>Поля {{ i }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for time in data["GAME"][game].keys() %}
+                            <tr>
+                                {% if data["GAME"][game][time] %}
+                                    <td>{{ time }}</td>
+                                    {% for t in data["GAME"][game][time] %}
+                                        <td>{{ t }}</td>
+                                    {% endfor %}
+                                {% else %}
+                                    {% if 'Day' in time %}
+                                        <td colspan="{{ data['NUM_FIELDS']|length + 1 }}" class="text-center fw-bold bg-primary" style="font-size: 18px;">
+                                            {{ time }}
+                                        </td>
+                                    {% endif %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        {% endfor %}
+
+{% endblock %}

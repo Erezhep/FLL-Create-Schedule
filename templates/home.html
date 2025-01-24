@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename='img/schedule_example.png') }}" class="img-fluid">
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                    <h2>Инструкция</h2>
+                    <p>Здесь будет ваш текст, который будет находиться на правой половине экрана. Вы можете вставить любое описание, информацию, инструкции и т. д.</p>
+                    <p>Используйте этот макет для создания чистых и функциональных страниц с разделением на два блока: изображение и текст.</p>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
