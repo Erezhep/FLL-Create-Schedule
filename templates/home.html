@@ -4,19 +4,53 @@
 
 {% block content %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="{{ url_for('static', filename='img/schedule_example.png') }}" class="img-fluid">
-            </div>
-            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div class="text-center">
-                    <h2>Инструкция</h2>
-                    <p>Здесь будет ваш текст, который будет находиться на правой половине экрана. Вы можете вставить любое описание, информацию, инструкции и т. д.</p>
-                    <p>Используйте этот макет для создания чистых и функциональных страниц с разделением на два блока: изображение и текст.</p>
-                </div>    
+<div class="container-fluid py-5" style="background-color: #f9f9f9;">
+    <div class="row align-items-center">
+        <!-- Левая колонка с изображением -->
+        <div class="col-md-6 text-center">
+            <img src="{{ url_for('static', filename='img/schedule_example.png') }}" 
+                 class="img-fluid shadow rounded" 
+                 alt="Пример таблицы Excel"
+                 style="max-width: 100%; height: auto; border: 1px solid #ddd;">
+        </div>
+        
+        <!-- Правая колонка с текстом -->
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4" style="color: #2c3e50; font-weight: bold;">Подготовка Excel-файла</h3>
+                    <p class="text-muted mb-3">
+                        Перед загрузкой файла на сервер убедитесь, что файл соответствует следующим требованиям:
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Формат:</strong> файл должен быть в формате <code>.xlsx</code> или <code>.xls</code>.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Колонки:</strong> должны быть две основные колонки:
+                            <ul>
+                                <li><strong>Teams</strong>: содержит названия команд (например, "Kazakhstan", "Space2024").</li>
+                                <li><strong>Count</strong>: содержит числовые значения, соответствующие каждой команде.</li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Первая строка:</strong> должна содержать заголовки колонок <code>Teams</code> и <code>Count</code>.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Чистота данных:</strong> проверьте, чтобы в колонках не было пустых строк, ошибок или лишних данных.
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Дополнительные условия:</strong> любые дополнительные данные должны находиться в отдельных колонках или листах, если требуется.
+                        </li>
+                    </ul>
+                    <p class="mt-3 text-muted">
+                        После подготовки Excel-файла вы можете загрузить его на сервер для дальнейшей обработки.
+                    </p>
+
+                </div>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
