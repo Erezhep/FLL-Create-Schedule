@@ -9,6 +9,11 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="mb-4 is-invalid">
+            {% if error %}
+              <div class="alert alert-warning text-center" role="alert">
+                Пожалуйста, ознакомьтесь с инструкцией на главной странице о формате данных, требуемом в таблице!
+              </div>
+            {% endif %}
             <label for="excel_file" class="form-label">Choose file (.xlsx)</label>
             <input
               type="file"

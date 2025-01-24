@@ -21,15 +21,17 @@ def create_schedule():
         
         if not file:
             # If no file is uploaded, display an error message on the form
-            return render_template("create_schedule.html", active_page="create", upload_file='upload')
+            return render_template("create_schedule.html", active_page="create", upload_file='upload', error = '')
+        try:
+            data = read_excel_file(file)
+
+            matches = ['Тренировачная игра', 'Официальная игра 1', 'Официальная игра 2', 'Официальная игра 3']
+
+            # After processing the file, render the result page
+            return render_template("result.html", data = data, games = matches)
+        except Exception as e:
+            return render_template("create_schedule.html", active_page="create", upload_file='upload', error = f'{e}')
         
-        data = read_excel_file(file)
-        
-        matches = ['Тренировачная игра', 'Официальная игра 1', 'Официальная игра 2', 'Официальная игра 3']
-        
-        # After processing the file, render the result page
-        return render_template("result.html", data = data, games = matches)
-    
     
 if __name__ == "__main__":
     app.run(host="localhost",
